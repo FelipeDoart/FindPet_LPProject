@@ -1,12 +1,17 @@
 package model;
 
 public class Admin {
-    String email = "admin@gmail.com";
-    int senha = 1234;
 
-    //Gets
-    public String getEmail() {return email;}
-    public int getSenha() {return senha;}
+    private final String usuario = "admin";
+    private final String senha = "12345";
 
+    public String getUsuario() {
+        return usuario;
+    }
 
+    public String getSenha() {
+        return senha;
+    }
 }
+
+

@@ -1,12 +1,28 @@
 package service;
 
 import model.Adotante;
-
 import java.util.ArrayList;
-public class AdotanteService {
-    private ArrayList<Adotante> adts = new ArrayList<>();
+import java.util.List;
 
-    public void inserirAdotante (Adotante a){
-        adts.add(a);
+public class AdotanteService {
+
+    private List<Adotante> adotantes = new ArrayList<>();
+
+    public void adicionarAdotante(Adotante a) {
+        adotantes.add(a);
+    }
+
+    public void listarAdotantes() {
+        if (adotantes.isEmpty()) {
+            System.out.println("Nenhum adotante cadastrado.");
+            return;
+        }
+
+        for (Adotante a : adotantes) {
+            System.out.println(a.getTipoAdotante()
+                    + " - Nome: " + a.getNome()
+                    + " | Email: " + a.getEmail()
+                    + " | Telefone: " + a.getTelefone());
+        }
     }
 }
