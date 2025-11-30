@@ -84,7 +84,7 @@ public class Main {
                                     cata.listarCatalogo();
                                     System.out.println("===================");
                                     System.out.println("Insira o ID a ser excluido:");
-                                    cata.excluir(sc.nextInt())
+                                    cata.excluir(sc.nextInt());
                                     break;
                                 case 0:
                                     System.out.println("Saindo do menu admin...");

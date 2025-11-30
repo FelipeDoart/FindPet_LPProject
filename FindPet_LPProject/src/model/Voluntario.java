@@ -1,8 +1,7 @@
 package model;
+import Interfaces.cadastarAnimal;
 
-import interfaces.CadastroAnimal;
-
-public class Voluntario extends Adotante implements CadastroAnimal {
+public class Voluntario extends Adotante implements cadastarAnimal {
 
     public Voluntario(String nome, String email, String telefone) {
         super(nome, email, telefone);

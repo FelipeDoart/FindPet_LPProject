@@ -20,7 +20,8 @@ public class CatalogoController {
         catalogoService.atualizarAnimal(nome, novoNome, novaRaca, novaIdade, novaLocal);
     }
 
-    public void excluir(String nome) {
-        catalogoService.excluir(nome);
+    public void excluir(int id) {
+        catalogoService.excluir(id);
     }
+
 }

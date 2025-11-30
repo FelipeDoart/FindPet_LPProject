@@ -42,14 +42,9 @@ public class CatalogoService {
         System.out.println("Animal atualizado no catálogo!");
     }
 
-    public void excluir(String nome) {
-        for (int i = 0; i < catalogo.size(); i++) {
-            if (catalogo.get(i).getNome().equalsIgnoreCase(nome)) {
-                catalogo.remove(i);
-                System.out.println("Animal removido do catálogo!");
-                return;
-            }
-        }
-        System.out.println("Animal não encontrado no catálogo.");
+    public void excluir(int id) {
+        catalogo.removeIf(a -> a.getId() == id);
+        System.out.println("Animal removido do catálogo!");
     }
+
 }
