@@ -50,4 +50,8 @@ public class FormularioAdocaoService {
 
         System.out.println("Adoção registrada com sucesso!");
     }
+
+    public List<FormularioAdocao> getFormularios() {
+        return formularios;
+    }
 }

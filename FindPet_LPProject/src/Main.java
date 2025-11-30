@@ -1,6 +1,6 @@
 
-import controller.AdminController;
-import controller.AdotantesController;
+import controller.*;
+
 import java.util.Scanner;;
 public class Main {
 
@@ -9,6 +9,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         AdotantesController controller = new AdotantesController();
         AdminController adminController = new AdminController();
+        FormularioController form = new FormularioController();
+        AnimalController anim = new AnimalController();
+        CatalogoController cata = new CatalogoController();
 
         int opcao = 0;
 
@@ -63,15 +66,25 @@ public class Main {
                         do {
                             adminController.mostrarMenuAdmin();
                             System.out.print("Escolha: ");
+                            System.out.println("1 - Lista de pedidos de adoção");
+                            System.out.println("2 - Remover animais");
+                            System.out.println("0 - Deslogar");
                             opcaoAdmin = sc.nextInt();
                             sc.nextLine();
 
                             switch (opcaoAdmin) {
                                 case 1:
+                                    System.out.println("===================");
+                                    System.out.println("Lista de pedidos:");
+                                    form.listarFormularios();
                                     break;
                                 case 2:
-                                    break;
-                                case 3:
+                                    System.out.println("===================");
+                                    System.out.println("Listando os animais:");
+                                    cata.listarCatalogo();
+                                    System.out.println("===================");
+                                    System.out.println("Insira o ID a ser excluido:");
+                                    cata.excluir(sc.nextInt())
                                     break;
                                 case 0:
                                     System.out.println("Saindo do menu admin...");
@@ -92,4 +105,5 @@ public class Main {
                     System.out.println("Opção inválida.");
             }
         }sc.close();}
+
 }
