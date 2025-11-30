@@ -1,12 +1,22 @@
 package service;
 
 import model.Animal;
+import enums.Situacao;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalService {
 
+    private static final AnimalService instance = new AnimalService();
+    public static AnimalService getInstance() { return instance; }
+
     private List<Animal> animais = new ArrayList<>();
+    private int nextId = 1;
+
+    private AnimalService() {}
+
+    private final List<Animal> animais = new ArrayList<>();
     private int nextId = 1;
 
     public int gerarId() {
@@ -19,16 +29,17 @@ public class AnimalService {
     }
 
     public List<Animal> listarAnimais() {
-        return animais;
+        return new ArrayList<>(animais); // evita exposição da lista interna
     }
 
     public void atualizarSituacao(int id, String situacao) {
         for (Animal a : animais) {
             if (a.getId() == id) {
                 try {
-                    a.setSituacao(Enum.valueOf(enums.Situacao.class, situacao));
+                    Situacao nova = Situacao.valueOf(situacao.toUpperCase());
+                    a.setSituacao(nova);
                     System.out.println("Situação atualizada!");
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println("Situação inválida!");
                 }
                 return;

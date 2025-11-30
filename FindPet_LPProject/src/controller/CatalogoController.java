@@ -2,7 +2,6 @@ package controller;
 
 import model.Animal;
 import service.CatalogoService;
-import java.util.List;
 
 public class CatalogoController {
 
@@ -12,16 +11,29 @@ public class CatalogoController {
         catalogoService.adicionar(animal);
     }
 
-    public List<Animal> listarCatalogo() {
-        return catalogoService.listarCatalogo();
+    public void listarCatalogo() {
+        var lista = catalogoService.listarCatalogo();
+
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum animal no catálogo.");
+            return;
+        }
+
+        System.out.println("\n=== CATALOGO DE ANIMAIS ===");
+        for (Animal a : lista) {
+            System.out.println("ID: " + a.getId() +
+                    " | Nome: " + a.getNome() +
+                    " | Raça: " + a.getRaca() +
+                    " | Idade: " + a.getIdade() +
+                    " | Localização: " + a.getLocalizacao());
+        }
     }
 
-    public void atualizarAnimal(String nome, String novoNome, String novaRaca, int novaIdade, String novaLocal) {
-        catalogoService.atualizarAnimal(nome, novoNome, novaRaca, novaIdade, novaLocal);
+    public void atualizarAnimal(int id, String novoNome, String novaRaca, int novaIdade, String novaLocal) {
+        catalogoService.atualizarAnimal(id, novoNome, novaRaca, novaIdade, novaLocal);
     }
 
     public void excluir(int id) {
         catalogoService.excluir(id);
     }
-
 }

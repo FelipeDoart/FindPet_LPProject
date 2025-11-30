@@ -1,8 +1,11 @@
 package service;
 
+import controller.CatalogoController;
+import controller.FormularioController;
 import model.Adotante;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AdotanteService {
 

@@ -1,6 +1,5 @@
 package controller;
 
-import model.Adotante;
 import model.FormularioAdocao;
 import service.FormularioAdocaoService;
 import service.AnimalService;
@@ -17,8 +16,8 @@ public class FormularioController {
     }
 
     // Endpoint para iniciar o processo de adoção
-    public void iniciarProcessoAdocao(Adotante adotante, String cpf, String endereco, int idAnimal) {
-        formularioService.iniciarProcessoAdocao(adotante, idAnimal, cpf, endereco);
+    public void iniciarProcessoAdocao(int idAnimal,String nome, String Email, String telefone, String cpf, String endereco ) {
+        formularioService.iniciarProcessoAdocao(idAnimal,nome,Email,telefone,  cpf, endereco);
     }
 
     // Endpoint para listar todos os formulários já enviados

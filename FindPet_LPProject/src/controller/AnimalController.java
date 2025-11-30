@@ -1,13 +1,14 @@
 package controller;
 
 import model.*;
-import enums.*;
+import enums.Genero;
 import service.AnimalService;
+
 import java.util.List;
 
 public class AnimalController {
 
-    private AnimalService service = new AnimalService();
+    private final AnimalService service = AnimalService.getInstance();
 
     public void cadastrarCachorro(String nome, String raca, int idade, Genero genero, String local) {
         int id = service.gerarId();

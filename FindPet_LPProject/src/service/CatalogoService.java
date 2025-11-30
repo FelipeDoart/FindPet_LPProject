@@ -17,34 +17,37 @@ public class CatalogoService {
         return catalogo;
     }
 
-    public Animal buscarPorNome(String nome) {
-        for (Animal a : catalogo) {
-            if (a.getNome().equalsIgnoreCase(nome)) {
-                return a;
-            }
-        }
-        return null;
+    public Animal buscarPorId(int id) {
+        return catalogo.stream()
+                .filter(a -> a.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
-    public void atualizarAnimal(String nome, String novoNome, String novaRaca, int novaIdade, String novaLocalizacao) {
-        Animal a = buscarPorNome(nome);
+    public void atualizarAnimal(int id, String novoNome, String novaRaca, int novaIdade, String novaLocalizacao) {
+
+        Animal a = buscarPorId(id);
 
         if (a == null) {
             System.out.println("Animal não encontrado no catálogo.");
             return;
         }
 
-        a.nome = novoNome;
-        a.raca = novaRaca;
-        a.idade = novaIdade;
-        a.localizacao = novaLocalizacao;
+        a.setNome(novoNome);
+        a.setRaca(novaRaca);
+        a.setIdade(novaIdade);
+        a.setLocalizacao(novaLocalizacao);
 
         System.out.println("Animal atualizado no catálogo!");
     }
 
     public void excluir(int id) {
-        catalogo.removeIf(a -> a.getId() == id);
-        System.out.println("Animal removido do catálogo!");
-    }
+        boolean removido = catalogo.removeIf(a -> a.getId() == id);
 
+        if (removido) {
+            System.out.println("Animal removido do catálogo!");
+        } else {
+            System.out.println("ID não encontrado.");
+        }
+    }
 }

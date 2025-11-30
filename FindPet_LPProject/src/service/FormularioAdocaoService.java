@@ -1,8 +1,9 @@
 package service;
 import model.*;
-import service.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import model.FormularioAdocao;
 
 public class FormularioAdocaoService {
@@ -24,7 +25,7 @@ public class FormularioAdocaoService {
         System.out.println("Animal não encontrado ou já adotado!");
         return null;
     }
-    public void iniciarProcessoAdocao(Adotante adotante, int idAnimal, String cpf, String endereco) {
+    public void iniciarProcessoAdocao(int idAnimal, String nome, String Email, String telefone,  String cpf, String endereco) {
 
         Animal escolhido = escolherAnimal(idAnimal);
 
@@ -34,9 +35,9 @@ public class FormularioAdocaoService {
 
         // Criar o formulário
         FormularioAdocao form = new FormularioAdocao(
-                adotante.getNome(),
-                adotante.getEmail(),
-                adotante.getTelefone(),
+                nome,
+                Email,
+                telefone,
                 cpf,
                 endereco,
                 escolhido

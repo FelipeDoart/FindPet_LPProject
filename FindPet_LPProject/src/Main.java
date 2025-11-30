@@ -1,4 +1,4 @@
-
+import enums.*;
 import controller.*;
 
 import java.util.Scanner;;
@@ -10,8 +10,9 @@ public class Main {
         AdotantesController controller = new AdotantesController();
         AdminController adminController = new AdminController();
         FormularioController form = new FormularioController();
+        CatalogoController cata = new CatalogoController();// <-- APENAS UMA INSTÂNCIA
         AnimalController anim = new AnimalController();
-        CatalogoController cata = new CatalogoController();
+
 
         int opcao = 0;
 
@@ -39,17 +40,124 @@ public class Main {
                     System.out.print("Telefone (opcional): ");
                     String tel1 = sc.nextLine();
                     controller.cadastrarPessoaComum(nome1, email1, tel1);
-                    break;
+
+                    int opcao2 = -1;
+                    while (opcao2 != 0) {
+                        System.out.println("\n=== Menu do Adotante ===");
+                        System.out.println("1 - Ver catálogo de animais");
+                        System.out.println("2 - Enviar formulário de adoção");
+                        System.out.println("0 - Voltar ao menu inicial");
+                        System.out.print("Escolha: ");
+                        opcao2 = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (opcao2) {
+                            case 1:
+                                cata.listarCatalogo();
+                                break;
+                            case 2:
+
+                                System.out.println("Insira o id do animal");
+                                int idanimal = sc.nextInt();
+                                System.out.println("Insira o nome");
+                                String nome = sc.nextLine();
+                                System.out.println("Insira o Email");
+                                String Email = sc.nextLine();
+                                System.out.println("Insira o Telefone");
+                                String telefone = sc.nextLine();
+                                System.out.println("Insira o CPF");
+                                String CPF = sc.nextLine();
+                                System.out.println("Insira o endereco");
+                                String endereco = sc.nextLine();
+                                form.iniciarProcessoAdocao(idanimal,nome,Email,telefone,CPF,endereco);
+                                break;
+                            case 0:
+                                System.out.println("Voltando...");
+                                continue;
+                            default:
+                                System.out.println("Opção inválida.");
+                        }
+                    }
                 case 2:
                     System.out.println("\n--- Cadastro Voluntário ---");
                     System.out.print("Nome: ");
                     String nome2 = sc.nextLine();
                     System.out.print("Email: ");
                     String email2 = sc.nextLine();
-                    System.out.print("Telefone (OBRIGATÓRIO): ");
+                    System.out.print("Telefone: ");
                     String tel2 = sc.nextLine();
                     controller.cadastrarVoluntario(nome2, email2, tel2);
-                    break;
+
+                    int op = -1;
+                    while (op != 0) {
+
+                        System.out.println("\n=== Menu do Voluntário ===");
+                        System.out.println("1 - Cadastrar CACHORRO");
+                        System.out.println("2 - Cadastrar GATO");
+                        System.out.println("3 - Cadastrar PÁSSARO");
+                        System.out.println("4 - Listar animais");
+                        System.out.println("5 - Atualizar situação do animal");
+                        System.out.println("6 - Excluir animal");
+                        System.out.println("0 - Voltar");
+                        System.out.print("Escolha: ");
+
+                        op = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (op) {
+                            //String nome, String raca, int idade, Genero genero, String local
+                            case 1:
+                                System.out.println("Nome do animal");
+                                String nome = sc.nextLine();
+                                System.out.println("Raça do animal");
+                                String raca = sc.nextLine();
+                                System.out.println("Idade do animal");
+                                int idade = sc.nextInt();
+                                System.out.println("Genero do animal");
+                                Genero gen = Genero.valueOf(sc.next());
+                                System.out.println("Local onde foi encontrado");
+                                String local = sc.nextLine();
+                                anim.cadastrarCachorro(nome,raca,idade,gen,local);
+                                break;
+
+                            case 2:
+                                System.out.println("Nome do animal");
+                                String Gnome = sc.nextLine();
+                                System.out.println("Raça do animal");
+                                String Graca = sc.nextLine();
+                                System.out.println("Idade do animal");
+                                int Gidade = sc.nextInt();
+                                System.out.println("Genero do animal");
+                                Genero Ggen = Genero.valueOf(sc.next());
+                                System.out.println("Local onde foi encontrado");
+                                String Glocal = sc.nextLine();
+                                anim.cadastrarCachorro(Gnome,Graca,Gidade,Ggen,Glocal);
+                                break;
+
+                            case 3:
+                                System.out.println("Nome do animal");
+                                String Pnome = sc.nextLine();
+                                System.out.println("Raça do animal");
+                                String Praca = sc.nextLine();
+                                System.out.println("Idade do animal");
+                                int Pidade = sc.nextInt();
+                                System.out.println("Genero do animal");
+                                Genero Pgen = Genero.valueOf(sc.next());
+                                System.out.println("Local onde foi encontrado");
+                                String Plocal = sc.nextLine();
+                                anim.cadastrarCachorro(Pnome,Praca,Pidade,Pgen,Plocal);
+                                break;
+                            case 4:
+                                anim.listar();
+                                break;
+                            case 0:
+                                System.out.println("Voltando ao menu principal...");
+                                break;
+
+                            default:
+                                System.out.println("Opção inválida!");
+                        }
+                    }
 
                 case 3:
                     System.out.println("\n=== LOGIN ADMIN ===");
@@ -64,7 +172,6 @@ public class Main {
 
                         int opcaoAdmin;
                         do {
-                            adminController.mostrarMenuAdmin();
                             System.out.print("Escolha: ");
                             System.out.println("1 - Lista de pedidos de adoção");
                             System.out.println("2 - Remover animais");
@@ -85,6 +192,7 @@ public class Main {
                                     System.out.println("===================");
                                     System.out.println("Insira o ID a ser excluido:");
                                     cata.excluir(sc.nextInt());
+                                    cata.listarCatalogo();
                                     break;
                                 case 0:
                                     System.out.println("Saindo do menu admin...");
@@ -105,5 +213,4 @@ public class Main {
                     System.out.println("Opção inválida.");
             }
         }sc.close();}
-
 }
