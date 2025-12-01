@@ -16,12 +16,24 @@ public class FormularioAdocao {
         this.data = data;
     }
 
-    public FormularioAdocao(String nome, String email, String telefone, String cpf, String endereco, Animal animal) {
-    }
 
     public Adotante getAdotante() { return adotante; }
     public Animal getAnimal() { return animal; }
     public String getCpf() { return cpf; }
     public String getEndereco() { return endereco; }
     public String getData() { return data; }
+
+    @Override
+    public String toString() {
+        return "\n--- FORMULÁRIO DE ADOÇÃO ---" +
+                "\nNome do adotante: " + adotante.getNome() +
+                "\nEmail: " + adotante.getEmail() +
+                "\nTelefone: " + adotante.getTelefone() +
+                "\nCPF: " + cpf +
+                "\nEndereço: " + endereco +
+                "\nAnimal escolhido: " + animal.getNome() +
+                " (ID: " + animal.getId() + ", Espécie: " + animal.getEspecie() + ")" +
+                "\n------------------------------";
+    }
+
 }

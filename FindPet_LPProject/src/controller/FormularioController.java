@@ -1,40 +1,37 @@
 package controller;
 
+import model.Adotante;
 import model.FormularioAdocao;
 import service.FormularioAdocaoService;
 import service.AnimalService;
+
 import java.util.List;
 
 public class FormularioController {
 
-    private FormularioAdocaoService formularioService;
-    private AnimalService animalService;
+    private final FormularioAdocaoService service;
+    private final AdotantesController adotantes;
 
-    public FormularioController() {
-        this.animalService = new AnimalService();
-        this.formularioService = new FormularioAdocaoService();
+    public FormularioController(AdotantesController adotantes) {
+        this.adotantes = adotantes;
+        this.service = new FormularioAdocaoService(AnimalService.getInstance());
     }
 
-    // Endpoint para iniciar o processo de adoção
-    public void iniciarProcessoAdocao(int idAnimal,String nome, String Email, String telefone, String cpf, String endereco ) {
-        formularioService.iniciarProcessoAdocao(idAnimal,nome,Email,telefone,  cpf, endereco);
-    }
+    public void enviarFormulario(int idAnimal, String cpf, String endereco) {
 
-    // Endpoint para listar todos os formulários já enviados
-    public List<FormularioAdocao> listarFormularios() {
-        return formularioService.getFormularios();
-    }
+        Adotante a = adotantes.getAdotanteLogado();
 
-    // Endpoint para consultar um animal pelo ID
-    public void consultarAnimal(int id) {
-        if (animalService.listarAnimais().isEmpty()) {
-            System.out.println("Nenhum animal cadastrado!");
+        if (a == null) {
+            System.out.println("Nenhum adotante logado.");
             return;
         }
 
-        var animal = formularioService.escolherAnimal(id);
-        if (animal != null) {
-            System.out.println("Animal encontrado: " + animal.getNome());
-        }
+        service.criarFormulario(a, idAnimal, cpf, endereco);
+    }
+
+    public List<FormularioAdocao> listarFormularios() {
+        return service.listarFormularios();
     }
 }
+
+

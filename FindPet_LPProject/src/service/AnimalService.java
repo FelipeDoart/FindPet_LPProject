@@ -14,10 +14,7 @@ public class AnimalService {
     private List<Animal> animais = new ArrayList<>();
     private int nextId = 1;
 
-    private AnimalService() {}
-
-    private final List<Animal> animais = new ArrayList<>();
-    private int nextId = 1;
+    public AnimalService() {}
 
     public int gerarId() {
         return nextId++;

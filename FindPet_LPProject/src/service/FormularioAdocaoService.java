@@ -1,19 +1,26 @@
 package service;
-import model.*;
 
+import model.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.FormularioAdocao;
 
 public class FormularioAdocaoService {
 
     private List<FormularioAdocao> formularios = new ArrayList<>();
     private AnimalService animalService;
 
-    public void adicionarFormulario(FormularioAdocao f) {formularios.add(f);}
+    // Agora o service RECEBE o AnimalService
+    public FormularioAdocaoService(AnimalService animalService) {
+        this.animalService = animalService;
+    }
 
-    public List<FormularioAdocao> listarFormularios() {return formularios;}
+    public void adicionarFormulario(FormularioAdocao f) {
+        formularios.add(f);
+    }
+
+    public List<FormularioAdocao> listarFormularios() {
+        return formularios;
+    }
 
     public Animal escolherAnimal(int id) {
         for (Animal a : animalService.listarAnimais()) {
@@ -25,34 +32,20 @@ public class FormularioAdocaoService {
         System.out.println("Animal não encontrado ou já adotado!");
         return null;
     }
-    public void iniciarProcessoAdocao(int idAnimal, String nome, String Email, String telefone,  String cpf, String endereco) {
+
+    public void criarFormulario(Adotante adotante, int idAnimal, String cpf, String endereco) {
 
         Animal escolhido = escolherAnimal(idAnimal);
 
-        if (escolhido == null) {
-            return; // animal não existe
-        }
+        if (escolhido == null) return;
 
-        // Criar o formulário
-        FormularioAdocao form = new FormularioAdocao(
-                nome,
-                Email,
-                telefone,
-                cpf,
-                endereco,
-                escolhido
-        );
+        FormularioAdocao f = new FormularioAdocao(adotante, escolhido, cpf, endereco, "Hoje");
 
-        // Salvar formulário
-        adicionarFormulario(form);
+        formularios.add(f);
 
-        // Atualizar status do animal
         animalService.atualizarSituacao(idAnimal, "ADOTADO");
 
-        System.out.println("Adoção registrada com sucesso!");
+        System.out.println("Formulário enviado!");
     }
 
-    public List<FormularioAdocao> getFormularios() {
-        return formularios;
-    }
 }

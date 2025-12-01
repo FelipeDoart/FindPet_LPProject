@@ -1,7 +1,8 @@
 package model;
-import Interfaces.cadastarAnimal;
 
-public class Voluntario extends Adotante implements cadastarAnimal {
+
+
+public class Voluntario extends Adotante{
 
     public Voluntario(String nome, String email, String telefone) {
         super(nome, email, telefone);
@@ -14,11 +15,6 @@ public class Voluntario extends Adotante implements cadastarAnimal {
     @Override
     public String getTipoAdotante() {
         return "Voluntário";
-    }
-
-    @Override
-    public void cadastrarAnimal(Animal animal) {
-        System.out.println("Animal cadastrado pelo voluntário: " + this.nome);
     }
 }
 
